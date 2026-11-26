@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+const entries = Object.values(import.meta.glob('../../content/sermons/*.json', { eager: true, import: 'default' }));
+const sermons = entries.filter((item: any) => item.published && item.title).sort((a: any,b: any)=>String(b.date).localeCompare(String(a.date)));
+---
+<BaseLayout title="Sermons | AAO1" description="Watch and revisit biblical messages from AAO1.">
+  <section class="page-hero"><div class="container"><span class="eyebrow">Listen and grow</span><h1>Sermons</h1><p>Explore biblical teaching and revisit messages to encourage a life rooted in God's Word.</p></div></section>
+  <section class="section"><div class="container">{sermons.length ? <div class="card-grid">{sermons.map((sermon: any)=><article class="content-card"><span class="card-kicker">{sermon.scripture || 'Sermon'}{sermon.date ? ` · ${sermon.date}` : ''}</span><h3>{sermon.title}</h3><p>{sermon.summary}</p><div class="card-bottom"><span>{sermon.speaker || 'AAO1'}</span>{sermon.videoUrl ? <a href={sermon.videoUrl} target="_blank" rel="noreferrer">Watch message ↗</a> : <span>Video coming soon</span>}</div></article>)}</div> : <div class="empty-note">There are no published sermons yet. Add a sermon through Pages CMS and enable “Publish on website” to display it here.</div>}</div></section>
+</BaseLayout>
