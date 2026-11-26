@@ -1,0 +1,150 @@
+media:
+  images:
+    input: public/media
+    output: /aao1-church-website/media
+
+content:
+  - name: site
+    label: Site content
+    type: file
+    path: src/content/site.json
+    format: json
+    fields:
+      - name: churchName
+        label: Church name
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: heroEyebrow
+        label: Hero eyebrow
+        type: string
+      - name: heroTitle
+        label: Hero heading
+        type: text
+      - name: heroDescription
+        label: Hero introduction
+        type: text
+      - name: welcomeTitle
+        label: Welcome heading
+        type: string
+      - name: welcomeText
+        label: Welcome text
+        type: text
+      - name: mission
+        label: Mission statement
+        type: text
+      - name: vision
+        label: Vision statement
+        type: text
+      - name: serviceSchedule
+        label: Worship schedule
+        type: string
+      - name: location
+        label: Church location
+        type: string
+      - name: contactEmail
+        label: Public contact email
+        type: string
+      - name: facebookUrl
+        label: Facebook page URL
+        type: string
+
+  - name: sermons
+    label: Sermons
+    type: collection
+    path: src/content/sermons
+    format: json
+    filename: "{slug}.json"
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Sermon title
+        type: string
+      - name: slug
+        label: URL slug
+        type: string
+      - name: speaker
+        label: Speaker
+        type: string
+      - name: scripture
+        label: Scripture passage
+        type: string
+      - name: date
+        label: Sermon date
+        type: date
+      - name: summary
+        label: Summary
+        type: text
+      - name: videoUrl
+        label: Video URL
+        type: string
+      - name: published
+        label: Publish on website
+        type: boolean
+
+  - name: events
+    label: Events
+    type: collection
+    path: src/content/events
+    format: json
+    filename: "{slug}.json"
+    view:
+      primary: title
+      sort: date
+      order: asc
+    fields:
+      - name: title
+        label: Event title
+        type: string
+      - name: slug
+        label: URL slug
+        type: string
+      - name: date
+        label: Event date
+        type: date
+      - name: time
+        label: Event time
+        type: string
+      - name: location
+        label: Event location
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: registrationUrl
+        label: Registration URL
+        type: string
+      - name: published
+        label: Publish on website
+        type: boolean
+
+  - name: announcements
+    label: Announcements
+    type: collection
+    path: src/content/announcements
+    format: json
+    filename: "{slug}.json"
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Announcement title
+        type: string
+      - name: slug
+        label: URL slug
+        type: string
+      - name: date
+        label: Publish date
+        type: date
+      - name: summary
+        label: Announcement text
+        type: text
+      - name: published
+        label: Publish on website
+        type: boolean
