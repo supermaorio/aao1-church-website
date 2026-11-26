@@ -1,7 +1,10 @@
 media:
-  images:
+  - name: images
+    label: Church images
     input: public/media
-    output: /aao1-church-website/media
+    output: /media
+    extensions: [jpg, jpeg, png, webp, avif]
+    rename: safe
 
 content:
   - name: site
@@ -25,6 +28,12 @@ content:
       - name: heroDescription
         label: Hero introduction
         type: text
+      - name: heroImage
+        label: Hero image (optional)
+        type: image
+        options:
+          media: images
+          path: hero
       - name: welcomeTitle
         label: Welcome heading
         type: string
@@ -65,7 +74,7 @@ content:
         label: Sermon title
         type: string
       - name: slug
-        label: URL slug
+        label: URL slug (lowercase-with-hyphens)
         type: string
       - name: speaker
         label: Speaker
@@ -82,6 +91,12 @@ content:
       - name: videoUrl
         label: Video URL
         type: string
+      - name: coverImage
+        label: Cover image (optional)
+        type: image
+        options:
+          media: images
+          path: sermons
       - name: published
         label: Publish on website
         type: boolean
@@ -101,7 +116,7 @@ content:
         label: Event title
         type: string
       - name: slug
-        label: URL slug
+        label: URL slug (lowercase-with-hyphens)
         type: string
       - name: date
         label: Event date
@@ -118,6 +133,12 @@ content:
       - name: registrationUrl
         label: Registration URL
         type: string
+      - name: coverImage
+        label: Cover image (optional)
+        type: image
+        options:
+          media: images
+          path: events
       - name: published
         label: Publish on website
         type: boolean
@@ -137,7 +158,7 @@ content:
         label: Announcement title
         type: string
       - name: slug
-        label: URL slug
+        label: URL slug (lowercase-with-hyphens)
         type: string
       - name: date
         label: Publish date
