@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import site from '../content/site.json';
 
 interface Props {
   title?: string;
@@ -24,6 +25,7 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#101c2b" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <title>{title}</title>
   </head>
   <body>
@@ -32,7 +34,7 @@ const currentPath = Astro.url.pathname;
       <div class="container nav-wrap">
         <a class="brand" href={base} aria-label="AAO1 home">
           <span class="brand-mark">A<span>A</span>O1</span>
-          <span class="brand-copy"><strong>AAO1</strong><small>WORD · WITNESS · WORSHIP</small></span>
+          <span class="brand-copy"><strong>{site.churchName}</strong><small>{site.tagline}</small></span>
         </a>
         <nav class="main-nav" aria-label="Main navigation">
           {nav.map((item) => (
@@ -61,7 +63,7 @@ const currentPath = Astro.url.pathname;
         <div class="footer-links">
           <strong>Connect</strong>
           <a href={`${base}connect/`}>Visit and contact</a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+          
         </div>
       </div>
       <div class="container footer-bottom">
