@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../content/site.json';
+const hasEmail = site.contactEmail && !site.contactEmail.startsWith('Add ');
+const hasLocation = site.location && !site.location.startsWith('Add ');
+const hasSchedule = site.serviceSchedule && !site.serviceSchedule.startsWith('Add ');
+---
+<BaseLayout title="Connect | AAO1" description="Find contact and visit information for AAO1.">
+  <section class="page-hero"><div class="container"><span class="eyebrow">We would love to connect</span><h1>Take your next step.</h1><p>Whether you are planning a visit or simply have a question, use the information below to get in touch with AAO1.</p></div></section>
+  <section class="section"><div class="container contact-grid">
+    <div class="prose"><span class="eyebrow">Plan a visit</span><h2 style="font:600 40px var(--serif);color:var(--ink)">Come as you are.</h2><p>We look forward to welcoming you. Before visiting, please confirm the service schedule and location through the church's official communication channels.</p><p class="note">Prayer requests and other sensitive pastoral information should be sent only through an approved, private channel. This static preview does not collect or store submissions.</p></div>
+    <div class="contact-panel"><h2>Visit and contact</h2><div class="contact-row"><span>Worship schedule</span><strong>{hasSchedule ? site.serviceSchedule : 'Official schedule to be added'}</strong></div><div class="contact-row"><span>Location</span><strong>{hasLocation ? site.location : 'Official address to be added'}</strong></div><div class="contact-row"><span>Email</span><strong>{hasEmail ? site.contactEmail : 'Public email to be added'}</strong></div>{site.facebookUrl && <div class="contact-row"><span>Facebook</span><strong><a href={site.facebookUrl} target="_blank" rel="noreferrer">Visit our page ↗</a></strong></div>}</div>
+  </div></section>
+</BaseLayout>
