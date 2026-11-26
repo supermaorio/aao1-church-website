@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../content/site.json';
+---
+<BaseLayout title="About AAO1" description="Learn about AAO1, its mission, vision, and foundations.">
+  <section class="page-hero"><div class="container"><span class="eyebrow">Get to know us</span><h1>About AAO1</h1><p>Learn about the values and convictions that shape our church community.</p></div></section>
+  <section class="section"><div class="container"><div class="welcome-copy"><span class="eyebrow">Our story</span><h2>A life shaped by Christ and His Word</h2><p class="prose">This page is a starting framework. The church's approved history, leadership details, and statement of faith should be inserted and reviewed before the website is launched publicly.</p></div><div class="info-list"><div class="info-item"><strong>Our Mission</strong><span>{site.mission}</span></div><div class="info-item"><strong>Our Vision</strong><span>{site.vision}</span></div></div></div></section>
+  <section class="section section-dark"><div class="container"><span class="eyebrow">Our foundation</span><h2 style="font:600 42px var(--serif);margin:15px 0 30px">Word · Witness · Worship</h2><div class="values-grid"><article class="value-card"><h3>Word</h3><p>Growing in the knowledge and application of Scripture.</p></article><article class="value-card"><h3>Witness</h3><p>Making the good news of Jesus known through words and actions.</p></article><article class="value-card"><h3>Worship</h3><p>Honoring God through gathered worship and everyday life.</p></article></div></div></section>
+</BaseLayout>
