@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'AAO1 | Word • Witness • Worship', description = 'Discover AAO1, explore biblical teaching, and connect with our church community.' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const nav = [
+  { label: 'Home', href: base },
+  { label: 'About', href: `${base}about/` },
+  { label: 'Ministries', href: `${base}ministries/` },
+  { label: 'Sermons', href: `${base}sermons/` },
+  { label: 'Events', href: `${base}events/` },
+  { label: 'Connect', href: `${base}connect/` },
+];
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#101c2b" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href={base} aria-label="AAO1 home">
+          <span class="brand-mark">A<span>A</span>O1</span>
+          <span class="brand-copy"><strong>AAO1</strong><small>WORD · WITNESS · WORSHIP</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          {nav.map((item) => (
+            <a class:list={{ active: currentPath === item.href || (item.href !== base && currentPath.startsWith(item.href)) }} href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+        <a class="nav-cta" href={`${base}connect/`}>Plan a visit <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href={base}>
+            <span class="brand-mark">A<span>A</span>O1</span>
+            <span class="brand-copy"><strong>AAO1</strong><small>WORD · WITNESS · WORSHIP</small></span>
+          </a>
+          <p class="footer-note">A community growing in the Word, bearing witness to Christ, and gathering in worship.</p>
+        </div>
+        <div class="footer-links">
+          <strong>Explore</strong>
+          {nav.slice(1).map((item) => <a href={item.href}>{item.label}</a>)}
+        </div>
+        <div class="footer-links">
+          <strong>Connect</strong>
+          <a href={`${base}connect/`}>Visit and contact</a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© {new Date().getFullYear()} AAO1. All rights reserved.</span>
+        <span>Independent website preview · Not the live AAO1.org website</span>
+      </div>
+    </footer>
+  </body>
+</html>
