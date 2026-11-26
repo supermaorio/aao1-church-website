@@ -1,41 +1,65 @@
 # AAO1 Church Website
 
-A new, independent website project for AAO1, built separately from the current WordPress website.
+An independent redesign and rebuild of the AAO1 church website. This project is being developed separately from the existing WordPress installation.
 
-> **Safety boundary:** This repository is for development only. It does not connect to or modify the live AAO1.org WordPress installation. Do not change the live domain's DNS or WordPress hosting during development.
+> **Production safety:** This repository does not connect to or modify the live AAO1.org website. Do not change AAO1.org DNS, hosting, WordPress files, or its database as part of this development project.
 
-## Planned stack
+## Technology
 
-- [Astro](https://astro.build/) for the website framework
-- [Pages CMS](https://pagescms.org/) for Git-backed content editing
-- GitHub Actions for build and deployment automation
-- GitHub Pages for a preview deployment, once explicitly configured
+- **Astro** — fast, static-first website framework
+- **Pages CMS** — Git-backed editing dashboard for site content
+- **GitHub Actions** — automated build validation
+- **GitHub Pages** — planned preview hosting, to be enabled after build validation
 
-## Project status
-
-**Scaffolding stage.** The repository is intentionally kept separate from the production website. Hosting and custom-domain deployment are not enabled by this initial commit.
-
-## Planned content
+## Current project structure
 
 - Home
 - About AAO1
 - Ministries
-- Sermons and resources
+- Sermons
 - Events and announcements
-- Connect and contact
+- Connect and visit information
+
+## Content editing
+
+The Pages CMS configuration is in `.pages.yml`. It provides editing sections for site content, sermons, events, and announcements.
+
+Only entries with `published: true` appear in the public website build. Example entries are deliberately unpublished.
+
+Before publishing:
+1. Replace draft and placeholder copy with church-approved information.
+2. Confirm ministry names, mission, vision, service times, address, and contact details.
+3. Upload only media AAO1 has permission to publish.
+4. Review all content before switching its publish toggle on.
 
 ## Local development
 
-The Astro application will be added in the next implementation step. Once the project files are in place:
+Requires Node.js compatible with the installed Astro release.
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Content and privacy
+Create a production build:
 
-- Only publish content and media that AAO1 has approved for public use.
-- Do not commit confidential prayer requests, personal data, credentials, API keys, or private pastoral communications.
-- Keep form submissions in a secure service with access controls, not in public Git history.
-- Preserve existing WordPress URLs and content until a migration is reviewed and approved.
+```bash
+npm run build
+npm run preview
+```
+
+## Preview deployment
+
+The Astro configuration currently targets this repository preview path:
+
+`https://supermaorio.github.io/aao1-church-website/`
+
+GitHub Pages deployment is intentionally not enabled yet. A build-validation workflow runs separately; enabling publication will be a deliberate next step after reviewing the build.
+
+## Privacy and security
+
+- Never commit passwords, API keys, access tokens, private pastoral messages, or confidential prayer requests.
+- Do not collect sensitive prayer requests in static files or public GitHub issues.
+- Use an approved secure form provider for submissions that require restricted access.
+- Keep the WordPress website and its backups intact until a separately approved migration and launch.
+- Keep the GitHub repository access protected with two-factor authentication.
