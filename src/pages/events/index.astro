@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => path ? `${base}${path.replace(/^\//, '')}` : '';
 const entries = Object.values(import.meta.glob('../../content/events/*.json', { eager: true, import: 'default' }));
 const events = entries.filter((item: any) => item.published && item.title).sort((a: any,b: any)=>String(a.date).localeCompare(String(b.date)));
 ---
 <BaseLayout title="Events | AAO1" description="Find upcoming events and activities at AAO1.">
   <section class="page-hero"><div class="container"><span class="eyebrow">Gather and grow</span><h1>Events</h1><p>Stay connected with upcoming gatherings, church activities, and opportunities to grow together.</p></div></section>
-  <section class="section"><div class="container">{events.length ? <div class="card-grid">{events.map((event: any)=><article class="content-card"><span class="card-kicker">{event.date}{event.time ? ` · ${event.time}` : ''}</span><h3>{event.title}</h3><p>{event.description}</p><div class="card-bottom"><span>{event.location || 'AAO1'}</span>{event.registrationUrl ? <a href={event.registrationUrl} target="_blank" rel="noreferrer">Register ↗</a> : <span>See details</span>}</div></article>)}</div> : <div class="empty-note">No events are published yet. Add event details through Pages CMS when dates and information are confirmed.</div>}</div></section>
+  <section class="section"><div class="container">{events.length ? <div class="card-grid">{events.map((event: any)=><article class="content-card">{event.coverImage && <img class="card-image" src={asset(event.coverImage)} alt="" loading="lazy" />}<span class="card-kicker">{event.date}{event.time ? ` · ${event.time}` : ''}</span><h3>{event.title}</h3><p>{event.description}</p><div class="card-bottom"><span>{event.location || 'AAO1'}</span>{event.registrationUrl ? <a href={event.registrationUrl} target="_blank" rel="noreferrer">Register ↗</a> : <span>See details</span>}</div></article>)}</div> : <div class="empty-note">No events are published yet. Add event details through Pages CMS when dates and information are confirmed.</div>}</div></section>
 </BaseLayout>
