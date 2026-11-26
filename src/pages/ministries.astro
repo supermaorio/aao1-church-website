@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const ministries = [
+  {number:'01',title:'Worship',description:'Create space for the church to respond to God through Scripture-shaped, Christ-centered worship.'},
+  {number:'02',title:'Discipleship',description:'Encourage spiritual growth through biblical learning, fellowship, and practical obedience.'},
+  {number:'03',title:'Youth and Next Generation',description:'Help young people know Scripture, follow Jesus, and serve with purpose.'},
+  {number:'04',title:'Outreach and Missions',description:'Share the hope of the gospel and serve neighbors with compassion.'}
+];
+---
+<BaseLayout title="Ministries | AAO1" description="Explore ministry areas and opportunities to serve at AAO1.">
+  <section class="page-hero"><div class="container"><span class="eyebrow">Grow and serve</span><h1>Ministries</h1><p>Discover ways to grow in faith, build relationships, and serve others. These are starter categories and must be confirmed against AAO1's actual ministry structure.</p></div></section>
+  <section class="section"><div class="container"><div class="ministry-grid">{ministries.map((item)=><article class="ministry-card"><span class="index">{item.number}</span><h2>{item.title}</h2><p>{item.description}</p></article>)}</div><p class="note" style="margin-top:24px">Ministry names and descriptions are draft placeholders. Replace them with approved ministry information before public launch.</p></div></section>
+</BaseLayout>
