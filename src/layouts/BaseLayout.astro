@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href={base} aria-label="AAO1 home">
-          <span class="brand-mark">A<span>A</span>O1</span>
+          <img class="brand-logo" src={`${base}aao1-logo.png`} alt="AAO1 — AWE-DIN of One Church" />
           <span class="brand-copy"><strong>{site.churchName}</strong><small>{site.tagline}</small></span>
         </a>
         <nav class="main-nav" aria-label="Main navigation">
@@ -50,8 +50,8 @@ const currentPath = Astro.url.pathname;
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a class="brand footer-brand" href={base}>
-            <span class="brand-mark">A<span>A</span>O1</span>
+          <a class="brand footer-brand" href={base} aria-label="AAO1 home">
+            <img class="brand-logo footer-logo" src={`${base}aao1-logo.png`} alt="AAO1 — AWE-DIN of One Church" />
             <span class="brand-copy"><strong>AAO1</strong><small>WORD · WITNESS · WORSHIP</small></span>
           </a>
           <p class="footer-note">A community growing in the Word, bearing witness to Christ, and gathering in worship.</p>
@@ -63,7 +63,6 @@ const currentPath = Astro.url.pathname;
         <div class="footer-links">
           <strong>Connect</strong>
           <a href={`${base}connect/`}>Visit and contact</a>
-          
         </div>
       </div>
       <div class="container footer-bottom">
