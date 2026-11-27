@@ -3,13 +3,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../content/site.json';
 
 const base = import.meta.env.BASE_URL;
-const asset = (path: string) => path ? `${base}${path.replace(/^\//, '')}` : '';
-const allSermons = Object.values(import.meta.glob('../content/sermons/*.json', { eager: true, import: 'default' }));
+const asset = (path: string) => path ? `${base}${path.replace(/^\\//, '')}` : '';
 const allEvents = Object.values(import.meta.glob('../content/events/*.json', { eager: true, import: 'default' }));
 const allAnnouncements = Object.values(import.meta.glob('../content/announcements/*.json', { eager: true, import: 'default' }));
-const sermons = allSermons.filter((item: any) => item.published && item.title).sort((a: any, b: any) => String(b.date).localeCompare(String(a.date))).slice(0, 3);
 const events = allEvents.filter((item: any) => item.published && item.title).sort((a: any, b: any) => String(a.date).localeCompare(String(b.date))).slice(0, 3);
 const announcements = allAnnouncements.filter((item: any) => item.published && item.title).slice(0, 2);
+
+const beliefs = [
+  { title: 'Of the Scriptures', href: 'https://www.aao1.org/brizy-3405/' },
+  { title: 'God', href: 'https://www.aao1.org/brizy-3423/' },
+  { title: 'God the Father', href: 'https://www.aao1.org/god-copy/' },
+  { title: 'God the Son', href: 'https://www.aao1.org/god-the-son/' },
+  { title: 'God the Holy Spirit', href: 'https://www.aao1.org/god-the-holy-spirit/' },
+  { title: 'The Virgin Birth', href: 'https://www.aao1.org/the-virgin-birth/' },
+  { title: 'Salvation', href: 'https://www.aao1.org/salvation/' },
+  { title: 'Resurrection & Priesthood of Christ', href: 'https://www.aao1.org/resurrection-and-priesthood-of-christ/' },
+  { title: 'Man', href: 'https://www.aao1.org/man/' },
+  { title: 'The Gospel', href: 'https://www.aao1.org/the-gospel/' },
+  { title: 'Grace & the New Birth', href: 'https://www.aao1.org/grace-and-the-new-birth/' },
+  { title: 'The Atonement of Christ', href: 'https://www.aao1.org/the-atonement-of-christ/' },
+  { title: 'The Grace of God', href: 'https://www.aao1.org/the-grace-of-god/' },
+  { title: 'The Regeneration of the Sinner', href: 'https://www.aao1.org/the-regeneration-of-the-sinner/' },
+  { title: 'The Election to Salvation', href: 'https://www.aao1.org/the-election-to-salvation/' },
+  { title: 'The Sovereignty of God', href: 'https://www.aao1.org/the-sovereignty-of-god/' },
+  { title: 'The Free Will of Man', href: 'https://www.aao1.org/the-free-will-of-man/' },
+  { title: 'The Great Commission', href: 'https://www.aao1.org/the-great-commission/' },
+  { title: 'Justification', href: 'https://www.aao1.org/justification/' },
+  { title: 'Sanctification', href: 'https://www.aao1.org/sanctification/' },
+  { title: 'The Security of the Believers', href: 'https://www.aao1.org/the-security-of-the-believers/' },
+  { title: 'The Church', href: 'https://www.aao1.org/the-church/' },
+  { title: 'Baptism and the Lord’s Supper', href: 'https://www.aao1.org/baptism-and-the-lords-supper/' },
+  { title: 'Angels', href: 'https://www.aao1.org/angels/' },
+  { title: 'Separation', href: 'https://www.aao1.org/separation/' },
+  { title: 'Civil Government', href: 'https://www.aao1.org/civil-government/' },
+  { title: 'Israel', href: 'https://www.aao1.org/israel/' },
+  { title: 'Last Things (Eschatology)', href: 'https://www.aao1.org/last-things-eschatology/' },
+  { title: 'Apostles’ Creed', href: 'https://www.aao1.org/apostles-creed/' },
+  { title: 'Athanasian Creed', href: 'https://www.aao1.org/athanasian-creed/' },
+  { title: 'Nicene Creed', href: 'https://www.aao1.org/nicene-creed/' }
+];
+
+const resources = [
+  { name: 'Enduring Word', detail: 'Bible study and commentary', href: 'https://enduringword.com/' },
+  { name: 'BibleProject', detail: 'Biblical themes, books, and videos', href: 'https://bibleproject.com/' },
+  { name: 'YouVersion', detail: 'Bible reading and study', href: 'https://www.youversion.com/' },
+  { name: 'AAO1 Site Resources', detail: 'Resources curated by AAO1', href: 'https://www.aao1.org/' },
+  { name: 'RSG', detail: 'AAO1-listed discipleship resource', href: null },
+  { name: 'AAO1 Fellowship Services', detail: 'Fellowship and ministry resources', href: 'https://www.aao1.org/' },
+  { name: 'DTBM', detail: 'Discover the Book Ministries', href: 'https://dtbm.org/' },
+  { name: 'Behold Israel', detail: 'Biblical teaching and Israel updates', href: 'https://www.beholdisrael.org/' }
+];
 ---
 <BaseLayout title="AAO1 | Word • Witness • Worship" description="Welcome to AAO1. Discover our church, explore biblical teaching, and find ways to connect.">
   <section class="hero">
@@ -62,10 +105,31 @@ const announcements = allAnnouncements.filter((item: any) => item.published && i
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <div><span class="eyebrow">Watch and grow</span><h2>Latest sermons</h2></div>
-        <a class="text-link" href={`${base}sermons/`}>View all sermons <span aria-hidden="true">→</span></a>
+        <div><span class="eyebrow">What we believe</span><h2>Statement of Faith</h2></div>
+        <a class="text-link" href="https://www.aao1.org/" target="_blank" rel="noreferrer">View AAO1 main website <span aria-hidden="true">↗</span></a>
       </div>
-      {sermons.length ? <div class="card-grid">{sermons.map((sermon: any) => <article class="content-card">{sermon.coverImage && <img class="card-image" src={asset(sermon.coverImage)} alt="" loading="lazy" />}<span class="card-kicker">{sermon.scripture || 'Sermon'}</span><h3>{sermon.title}</h3><p>{sermon.summary}</p><div class="card-bottom"><span>{sermon.speaker || 'AAO1'}</span>{sermon.videoUrl ? <a href={sermon.videoUrl} target="_blank" rel="noreferrer">Watch ↗</a> : <span>{sermon.date}</span>}</div></article>)}</div> : <div class="empty-note">Sermons will appear here once approved entries are added and published through the content editor.</div>}
+      <p class="prose">Explore the biblical convictions and doctrinal topics presented by AAO1. Each topic opens its corresponding statement on the main church website.</p>
+      <div class="belief-grid">
+        {beliefs.map((belief) => <a class="belief-link" href={belief.href} target="_blank" rel="noreferrer">{belief.title}<span aria-hidden="true">↗</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Grow in the Word</span><h2>Discipleship Resources</h2></div>
+        <p>Tools and teaching resources featured by AAO1 to support Bible study, spiritual growth, and discipleship.</p>
+      </div>
+      <div class="resource-grid">
+        {resources.map((resource) => <article class="resource-card">
+          <span class="resource-mark" aria-hidden="true">✦</span>
+          <h3>{resource.name}</h3>
+          <p>{resource.detail}</p>
+          {resource.href ? <a class="text-link" href={resource.href} target="_blank" rel="noreferrer">Explore resource <span aria-hidden="true">↗</span></a> : <span class="resource-note">Listed on AAO1.org</span>}
+        </article>)}
+      </div>
+      <p class="resource-footnote">Resource names follow the list displayed on AAO1.org. “RSG” is retained as written on the source site; its full name and destination were not specified there.</p>
     </div>
   </section>
 
