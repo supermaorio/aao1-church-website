@@ -8,6 +8,7 @@ interface Props {
 }
 const { title = 'AAO1 | Word • Witness • Worship', description = 'Discover AAO1, explore biblical teaching, and connect with our church community.' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const canonicalUrl = new URL(`${base}${Astro.url.pathname.replace(/^\/+/, '')}`, Astro.site);
 const nav = [
   { label: 'Home', href: base },
   { label: 'About', href: `${base}about/` },
@@ -25,7 +26,16 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#101c2b" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.churchName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <title>{title}</title>
   </head>
   <body>
@@ -37,9 +47,10 @@ const currentPath = Astro.url.pathname;
           <span class="brand-copy"><strong>{site.churchName}</strong><small>{site.tagline}</small></span>
         </a>
         <nav class="main-nav" aria-label="Main navigation">
-          {nav.map((item) => (
-            <a class:list={{ active: currentPath === item.href || (item.href !== base && currentPath.startsWith(item.href)) }} href={item.href}>{item.label}</a>
-          ))}
+          {nav.map((item) => {
+            const isCurrent = currentPath === item.href || (item.href !== base && currentPath.startsWith(item.href));
+            return <a class:list={{ active: isCurrent }} aria-current={isCurrent ? 'page' : undefined} href={item.href}>{item.label}</a>;
+          })}
         </nav>
         <a class="nav-cta" href={`${base}connect/`}>Plan a visit <span aria-hidden="true">↗</span></a>
       </div>
@@ -52,7 +63,7 @@ const currentPath = Astro.url.pathname;
         <div>
           <a class="brand footer-brand" href={base} aria-label="AAO1 home">
             <img class="brand-logo footer-logo" src={`${base}aao1-logo.png`} alt="AAO1 — AWE-DIN of One Church" />
-            <span class="brand-copy"><strong>AAO1</strong><small>WORD · WITNESS · WORSHIP</small></span>
+            <span class="brand-copy"><strong>{site.churchName}</strong><small>{site.tagline.toUpperCase()}</small></span>
           </a>
           <p class="footer-note">A community growing in the Word, bearing witness to Christ, and gathering in worship.</p>
         </div>
@@ -66,7 +77,7 @@ const currentPath = Astro.url.pathname;
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© {new Date().getFullYear()} AAO1. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} {site.churchName}. All rights reserved.</span>
         <span>Independent website preview · Not the live AAO1.org website</span>
       </div>
     </footer>
